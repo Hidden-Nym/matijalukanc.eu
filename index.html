@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matija Lukanc</title>
     <meta name="description" content="iOS developer & student. Apps, projects, and more.">
+    <meta name="theme-color" content="#08080b">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,18 +13,27 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #000000;
-            --bg-card: #111113;
-            --bg-card-hover: #18181b;
-            --border: #222225;
-            --border-hover: #333338;
-            --text: #e4e4e7;
-            --text-muted: #71717a;
-            --accent: #a1a1aa;
-            --link: #60a5fa;
-            --link-hover: #93bbfd;
-            --mono: 'JetBrains Mono', monospace;
-            --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            --bg: #07070b;
+            --bg-soft: #0e0e14;
+            --bg-card: rgba(22, 22, 32, 0.55);
+            --bg-card-hover: rgba(30, 30, 44, 0.78);
+            --border: rgba(129, 140, 248, 0.10);
+            --border-hover: rgba(129, 140, 248, 0.28);
+            --text: #ededf3;
+            --text-muted: #8c8ca0;
+            --text-dim: #5a5a6c;
+            --accent: #c7c7d6;
+            --indigo-1: #4f46e5;
+            --indigo-2: #6366f1;
+            --indigo-3: #818cf8;
+            --indigo-4: #a5b4fc;
+            --grad-1: #4338ca;
+            --grad-2: #6366f1;
+            --grad-3: #8b5cf6;
+            --link: #a5b4fc;
+            --link-hover: #c7d2fe;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, 'Helvetica Neue', sans-serif;
         }
 
         html { scroll-behavior: smooth; }
@@ -34,61 +44,154 @@
             color: var(--text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        body::before {
+        /* --- Aurora background --- */
+        .aurora {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .aurora::before,
+        .aurora::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            animation: float 18s ease-in-out infinite;
+        }
+        .aurora::before {
+            width: 520px;
+            height: 520px;
+            background: radial-gradient(circle, var(--grad-1), transparent 70%);
+            top: -120px;
+            left: -80px;
+        }
+        .aurora::after {
+            width: 460px;
+            height: 460px;
+            background: radial-gradient(circle, var(--grad-2), transparent 70%);
+            top: 160px;
+            right: -120px;
+            animation-delay: -9s;
+            opacity: 0.25;
+        }
+        .aurora-3 {
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--grad-3), transparent 70%);
+            filter: blur(120px);
+            opacity: 0.2;
+            top: 480px;
+            left: 35%;
+            animation: float 22s ease-in-out infinite -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -30px) scale(1.1); }
+        }
+
+        /* grain */
+        body::after {
             content: '';
             position: fixed;
             inset: 0;
             z-index: 9999;
             pointer-events: none;
-            opacity: 0.025;
+            opacity: 0.04;
+            mix-blend-mode: overlay;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
         .container {
-            max-width: 720px;
+            max-width: 760px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
         /* --- Header --- */
         header {
-            padding: 80px 0 60px;
-            animation: fadeUp 0.6s ease both;
+            padding: 120px 0 60px;
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .hello {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--indigo-4);
+            border: 1px solid var(--border);
+            padding: 7px 14px 7px 12px;
+            border-radius: 999px;
+            margin-bottom: 28px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.06));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            letter-spacing: -0.005em;
+        }
+        .hello .wave {
+            display: inline-block;
+            color: var(--indigo-3);
+            animation: spin 6s linear infinite;
+            font-size: 0.9rem;
+        }
+        @keyframes spin {
+            from { transform: rotate(0); }
+            to { transform: rotate(360deg); }
         }
 
         header h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
+            font-size: clamp(2.6rem, 6.5vw, 3.6rem);
+            font-weight: 700;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+            margin-bottom: 22px;
+            color: #fafaff;
+        }
+        .gradient-name {
+            background: linear-gradient(120deg, var(--indigo-2) 0%, var(--indigo-3) 40%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
             color: var(--text-muted);
-            font-size: 1.05rem;
-            font-weight: 300;
-            max-width: 480px;
-            line-height: 1.7;
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 540px;
+            line-height: 1.65;
         }
 
-        header .tag {
-            display: inline-block;
+        header .meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
             font-family: var(--mono);
-            font-size: 0.75rem;
-            color: var(--accent);
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-top: 16px;
-            letter-spacing: 0.02em;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+        header .meta svg {
+            width: 14px;
+            height: 14px;
+            opacity: 0.7;
         }
 
         /* --- Sections --- */
         section {
-            padding: 40px 0;
-            animation: fadeUp 0.6s ease both;
+            padding: 36px 0;
+            animation: fadeUp 0.7s ease both;
         }
 
         section:nth-child(2) { animation-delay: 0.1s; }
@@ -99,117 +202,154 @@
             font-family: var(--mono);
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
+            letter-spacing: 0.18em;
+            color: var(--text-dim);
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        /* --- Cards (shared) --- */
+        .card {
+            position: relative;
+            display: block;
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            margin-bottom: 12px;
+            transition: transform 0.25s cubic-bezier(.2,.8,.2,1), border-color 0.25s, background 0.25s;
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+        }
+
+        /* spotlight effect */
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(450px circle at var(--mx, 50%) var(--my, 50%), rgba(129, 140, 248, 0.18), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+        .card:hover::before { opacity: 1; }
 
         /* --- App Cards --- */
         .app-card {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
-            padding: 20px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg-card);
-            margin-bottom: 12px;
-            transition: background 0.2s, border-color 0.2s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .app-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--border-hover);
+            gap: 18px;
         }
 
         .app-icon {
             width: 56px;
             height: 56px;
-            border-radius: 12px;
+            border-radius: 14px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
         }
 
         .app-icon img {
             width: 100%;
             height: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             object-fit: cover;
         }
 
+        .app-info {
+            flex: 1;
+            min-width: 0;
+        }
+
         .app-info h3 {
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 1.02rem;
+            font-weight: 600;
             margin-bottom: 4px;
+            letter-spacing: -0.01em;
         }
 
         .app-info p {
             color: var(--text-muted);
-            font-size: 0.875rem;
-            font-weight: 300;
-            line-height: 1.5;
+            font-size: 0.89rem;
+            font-weight: 400;
+            line-height: 1.55;
         }
 
         .app-info .platform {
             font-family: var(--mono);
             font-size: 0.7rem;
             color: var(--accent);
-            margin-top: 8px;
+            margin-top: 10px;
             display: inline-block;
+            opacity: 0.7;
+        }
+
+        .app-card .arrow {
+            color: var(--text-dim);
+            transition: transform 0.25s, color 0.25s;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .app-card:hover .arrow {
+            transform: translate(3px, -3px);
+            color: var(--link);
         }
 
         /* --- Project Cards --- */
-        .project-card {
-            display: block;
-            padding: 20px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg-card);
-            margin-bottom: 12px;
-            transition: background 0.2s, border-color 0.2s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .project-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--border-hover);
-        }
-
         .project-card h3 {
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 1.02rem;
+            font-weight: 600;
             margin-bottom: 6px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .project-card p {
             color: var(--text-muted);
-            font-size: 0.875rem;
-            font-weight: 300;
-            line-height: 1.5;
+            font-size: 0.89rem;
+            font-weight: 400;
+            line-height: 1.55;
         }
 
         .project-card .tech {
             font-family: var(--mono);
             font-size: 0.7rem;
             color: var(--accent);
-            margin-top: 10px;
+            margin-top: 12px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
         .project-card .tech span {
             border: 1px solid var(--border);
-            padding: 2px 8px;
-            border-radius: 4px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.02);
         }
 
         /* --- Contact --- */
@@ -222,110 +362,111 @@
         .contact-links a {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-family: var(--mono);
             font-size: 0.8rem;
             color: var(--text);
             text-decoration: none;
-            padding: 10px 16px;
+            padding: 12px 18px;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             background: var(--bg-card);
-            transition: background 0.2s, border-color 0.2s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
         }
 
         .contact-links a:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-hover);
+            transform: translateY(-1px);
         }
 
         .contact-links a svg {
             width: 16px;
             height: 16px;
-            opacity: 0.7;
+            opacity: 0.85;
         }
 
         /* --- Legal Links --- */
         .legal-links {
             display: flex;
-            gap: 12px;
-            margin-top: -4px;
-            margin-bottom: 12px;
-            padding-left: 2px;
+            gap: 14px;
+            margin: -2px 0 14px 6px;
         }
 
         .legal-links a {
             font-family: var(--mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
+            font-size: 0.68rem;
+            color: var(--text-dim);
             text-decoration: none;
             letter-spacing: 0.02em;
+            transition: color 0.2s;
         }
 
-        .legal-links a:hover {
-            color: var(--link);
-        }
+        .legal-links a:hover { color: var(--link); }
 
         /* --- Footer --- */
         footer {
-            padding: 60px 0 40px;
+            padding: 60px 0 50px;
             text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-size: 0.78rem;
             font-family: var(--mono);
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        footer .heart { color: var(--indigo-3); }
+
+        /* --- Responsive --- */
+        @media (max-width: 480px) {
+            header { padding: 80px 0 40px; }
+            .app-card { gap: 14px; }
+            .app-icon { width: 48px; height: 48px; }
+            .contact-links a { flex: 1; justify-content: center; }
         }
 
-        /* --- Separator --- */
-        .sep {
-            height: 1px;
-            background: var(--border);
-            margin: 8px 0;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
         }
 
         /* --- Animations --- */
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 480px) {
-            header { padding: 48px 0 40px; }
-            header h1 { font-size: 1.6rem; }
-            .app-card { flex-direction: column; gap: 12px; }
-            .contact-links { flex-direction: column; }
-            .contact-links a { justify-content: center; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+    <div class="aurora"><div class="aurora-3"></div></div>
+
     <div class="container">
 
         <!-- HEADER -->
         <header>
             <h1>Matija Lukanc</h1>
-            <p>Profesionalni dijak, ter občasni iOS developer. Programiram aplikacije, delam nekaj z mikrokrmilniki.</p>
-            <span class="tag">Ljubljana Slovenija</span>
+            <p>Profesionalni dijak, ter občasni iOS developer. Programiram aplikacije in se igram z mikrokrmilniki.</p>
+            <div class="meta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Ljubljana, Slovenija
+            </div>
         </header>
 
         <!-- APPS -->
         <section>
             <div class="section-label">Aplikacije</div>
 
-
-            <a href="https://testflight.apple.com/join/dvyMrVds" target="_blank" rel="noopener" class="app-card">
+            <a href="https://testflight.apple.com/join/dvyMrVds" target="_blank" rel="noopener" class="card app-card">
                 <div class="app-icon"><img src="icons/lppbus.png" alt="LPPBus icon"></div>
                 <div class="app-info">
                     <h3>LPPBus</h3>
-                    <p>Prihodi avtobusov LPP v realnem času. Preprosto, hitro, brez nepotrebnih funkcij, trenutno v beta stanju.</p>
-                    <span class="platform">iOS &middot; iPadOS</span>
+                    <p>Prihodi avtobusov LPP v realnem času. Preprosto, hitro, brez nepotrebnih funkcij — trenutno v beta stanju.</p>
+                    <span class="platform">iOS · iPadOS · TestFlight</span>
                 </div>
+                <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             </a>
 
             <div class="legal-links">
@@ -333,13 +474,14 @@
                 <a href="/lppbus/terms">Terms of Use</a>
             </div>
 
-            <a href="https://apps.apple.com/app/id6756235954" target="_blank" rel="noopener" class="app-card">
+            <a href="https://apps.apple.com/app/id6756235954" target="_blank" rel="noopener" class="card app-card">
                 <div class="app-icon"><img src="icons/shifter.png" alt="Shifter icon"></div>
                 <div class="app-info">
                     <h3>Shifter</h3>
-                    <p>Za shranjevanje ter sledenje svojih zaslžkov.</p>
-                    <span class="platform">iOS &middot; iPadOS</span>
+                    <p>Za shranjevanje ter sledenje svojih zaslužkov.</p>
+                    <span class="platform">iOS · iPadOS · App Store</span>
                 </div>
+                <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             </a>
             <div class="legal-links">
                 <a href="/shifter/privacy">Privacy Policy</a>
@@ -351,37 +493,47 @@
         <section>
             <div class="section-label">Projekti</div>
 
-            <a href="https://github.com/Hidden-Nym/PiRobot" target="_blank" rel="noopener" class="project-card">
+            <a href="https://github.com/Hidden-Nym/PiRobot" target="_blank" rel="noopener" class="card project-card">
                 <h3>Robot z "Umetno inteligenco"</h3>
-                <p>Robot na raspberry pi, ki lahko vidi svet in mu daješ komande preko mikrofona ali tipkovnice.</p>
+                <p>Robot na Raspberry Pi, ki lahko vidi svet in mu daješ komande preko mikrofona ali tipkovnice.</p>
                 <div class="tech">
                     <span>Python</span>
-                    <span>Jeba</span>
+                    <span>Raspberry Pi</span>
+                    <span>Computer Vision</span>
                 </div>
             </a>
-            
         </section>
 
         <!-- CONTACT -->
         <section>
             <div class="section-label">Kontakt</div>
             <div class="contact-links">
-                <a href="mailto:lukancmatija@icloud.com">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
-  <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
-  <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
-</svg>
+                <a href="mailto:lukancmatija@outlook.com">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email
                 </a>
                 <a href="https://github.com/Hidden-Nym" target="_blank" rel="noopener">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-</svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+                    GitHub
                 </a>
-
             </div>
         </section>
 
         <!-- FOOTER -->
         <footer>
             &copy; 2026 Matija Lukanc
-        </>
+        </footer>
+    </div>
+
+    <script>
+        // spotlight cursor effect on cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('pointermove', e => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+            });
+        });
+    </script>
+</body>
+</html>
